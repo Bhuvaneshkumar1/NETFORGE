@@ -15,8 +15,10 @@ Designed as an all-in-one client-side suite, NetForge delivers instant subnettin
 ## 📽️ Application Walkthrough Demo
 
 <div align="center">
-  <video src="demo_video/demo_walkthrough.mp4" controls="controls" muted="muted" style="max-width: 100%; border-radius: 8px;">
-    NetForge IP Toolkit Interactive Demo
+
+https://github.com/user-attachments/assets/80547052-a25b-4030-93c1-eb81f3357e56
+
+  NetForge IP Toolkit Interactive Demo
   </video>
 </div>
 
