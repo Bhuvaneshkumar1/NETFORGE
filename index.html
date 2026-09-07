@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="NetForge IP Toolkit - Advanced IPv4 and IPv6 Network Engineering Workbench">
+    <title>NetForge — IP Network Toolkit</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="app" class="app-shell">
+
+    <!-- Mobile Overlay Backdrop -->
+    <div id="sidebarOverlay" class="sidebar-overlay"></div>
+
+    <!-- Sidebar Navigation -->
+    <aside id="sidebar" class="sidebar" aria-label="Main navigation">
+        <div class="sidebar-brand">
+            <div class="brand-logo">
+                <span class="brand-logo-icon"><i class="fa-solid fa-network-wired"></i></span>
+            </div>
+            <div class="brand-info">
+                <h1>NetForge</h1>
+                <span>IP NETWORK TOOLKIT</span>
+            </div>
+        </div>
+
+        <button id="sidebarClose" class="sidebar-close" type="button" aria-label="Close menu">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <div class="sidebar-search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input id="toolSearch" type="search" placeholder="Search tools..." autocomplete="off">
+            <kbd>Ctrl K</kbd>
+        </div>
+
+        <nav class="sidebar-navigation">
+            <!-- Workspace -->
+            <div class="nav-group">
+                <div class="nav-group-title">WORKSPACE</div>
+                <button class="nav-item active" data-page="dashboard" type="button">
+                    <span class="nav-icon"><i class="fa-solid fa-chart-line"></i></span>
+                    <span class="nav-label">Dashboard</span>
+                </button>
+            </div>
+
+            <!-- IPv4 Tools -->
+            <div class="nav-group">
+                <div class="nav-group-title">IPv4 TOOLS</div>
+                <button class="nav-item" data-page="subnet-calculator" type="button">
+                    <span class="nav-icon"><i class="fa-solid fa-calculator"></i></span>
+                    <span class="nav-label">Subnet Calculator</span>
+                </button>
+                <button class="nav-item" data-page="cidr-calculator" type="button">
+                    <span class="nav-icon"><i class="fa-solid fa-layer-group"></i></span>
+                    <span class="nav-label">CIDR Calculator</span>
+                </button>
+                <button class="nav-item" data-page="vlsm-calculator" type="button">
+                    <span class="nav-icon"><i class="fa-solid fa-diagram-project"></i></span>
+                    <span class="nav-label">VLSM Calculator</span>
+                    <span class="nav-badge">PRO</span>
+                </button>
+                <button class="nav-item" data-page="supernetting" type="button">
+                    <span class="nav-icon"><i class="fa-solid fa-object-group"></i></span>
+                    <span class="nav-label">Supernetting</span>
+                </button>
+                <button class="nav-item" data-page="ip-range" type="button">
+                    <span class="nav-icon"><i class="fa-solid fa-arrows-left-right"></i></span>
+                    <span class="nav-label">IP Range</span>
+                </button>
+                <button class="nav-item" data-page="wildcard" type="button">
+                    <span class="nav-icon"><i class="fa-solid fa-filter"></i></span>
+                    <span class="nav-label">Wildcard Mask</span>
+                </button>
+                <button class="nav-item" data-page="ip-classifier" type="button">
+                    <span class="nav-icon"><i class="fa-solid fa-tags"></i></span>
+                    <span class="nav-label">IP Classifier</span>
+                </button>
+                <button class="nav-item" data-page="ip-validator" type="button">
+                    <span class="nav-icon"><i class="fa-solid fa-circle-check"></i></span>
+                    <span class="nav-label">IP Validator</span>
+                </button>
+            </div>
+
+            <!-- Conversion -->
+            <div class="nav-group">
+                <div class="nav-group-title">CONVERSION</div>
+                <button class="nav-item" data-page="ip-converter" type="button">
+                    <span class="nav-icon"><i class="fa-solid fa-right-left"></i></span>
+                    <span class="nav-label">IP Converter</span>
+                </button>
+                <button class="nav-item" data-page="binary-converter" type="button">
+                    <span class="nav-icon"><i class="fa-solid fa-code"></i></span>
+                    <span class="nav-label">Binary Converter</span>
+                </button>
+                <button class="nav-item" data-page="decimal-converter" type="button">
+                    <span class="nav-icon"><i class="fa-solid fa-hashtag"></i></span>
+                    <span class="nav-label">Decimal Converter</span>
+                </button>
+                <button class="nav-item" data-page="hex-converter" type="button">
+                    <span class="nav-icon"><i class="fa-solid fa-code-branch"></i></span>
+                    <span class="nav-label">Hex Converter</span>
+                </button>
+                <button class="nav-item" data-page="integer-converter" type="button">
+                    <span class="nav-icon"><i class="fa-solid fa-arrow-down-1-9"></i></span>
+                    <span class="nav-label">Integer Converter</span>
+                </button>
+            </div>
+
+            <!-- IPv6 Tools -->
+            <div class="nav-group">
+                <div class="nav-group-title">IPv6 TOOLS</div>
+                <button class="nav-item" data-page="ipv6-calculator" type="button">
+                    <span class="nav-icon"><i class="fa-solid fa-globe"></i></span>
+                    <span class="nav-label">IPv6 Calculator</span>
+                </button>
+                <button class="nav-item" data-page="ipv6-compression" type="button">
+                    <span class="nav-icon"><i class="fa-solid fa-compress"></i></span>
+                    <span class="nav-label">Compress / Expand</span>
+                </button>
+                <button class="nav-item" data-page="ipv6-validator" type="button">
+                    <span class="nav-icon"><i class="fa-solid fa-shield-halved"></i></span>
+                    <span class="nav-label">IPv6 Validator</span>
+                </button>
+            </div>
+
+            <!-- Network -->
+            <div class="nav-group">
+                <div class="nav-group-title">NETWORK</div>
+                <button class="nav-item" data-page="mac-tools" type="button">
+                    <span class="nav-icon"><i class="fa-solid fa-ethernet"></i></span>
+                    <span class="nav-label">MAC Tools</span>
+                </button>
+                <button class="nav-item" data-page="port-reference" type="button">
+                    <span class="nav-icon"><i class="fa-solid fa-plug"></i></span>
+                    <span class="nav-label">Port Reference</span>
+                </button>
+                <button class="nav-item" data-page="protocol-reference" type="button">
+                    <span class="nav-icon"><i class="fa-solid fa-list"></i></span>
+                    <span class="nav-label">Protocol Reference</span>
+                </button>
+            </div>
+
+            <!-- Reference -->
+            <div class="nav-group">
+                <div class="nav-group-title">REFERENCE</div>
+                <button class="nav-item" data-page="cidr-reference" type="button">
+                    <span class="nav-icon"><i class="fa-solid fa-table-list"></i></span>
+                    <span class="nav-label">CIDR Reference</span>
+                </button>
+                <button class="nav-item" data-page="subnet-reference" type="button">
+                    <span class="nav-icon"><i class="fa-solid fa-table-cells"></i></span>
+                    <span class="nav-label">Subnet Reference</span>
+                </button>
+            </div>
+        </nav>
+
+        <div class="sidebar-footer">
+            <button id="settingsButton" class="sidebar-footer-btn" type="button">
+                <i class="fa-solid fa-gear"></i><span>Settings</span>
+            </button>
+            <button id="helpButton" class="sidebar-footer-btn" type="button">
+                <i class="fa-regular fa-circle-question"></i><span>Help</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+        <!-- Header -->
+        <header class="top-header">
+            <div class="header-left">
+                <button id="sidebarOpen" class="mobile-menu-btn" type="button" aria-label="Open menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <div class="breadcrumb">
+                    <span>NetForge</span>
+                    <i class="fa-solid fa-chevron-right"></i>
+                    <strong id="breadcrumbCurrent">Dashboard</strong>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button id="globalSearchBtn" class="header-btn search-trigger" type="button">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <span>Search tools...</span>
+                    <kbd>Ctrl K</kbd>
+                </button>
+                <button id="historyBtn" class="header-btn" type="button" title="History">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                </button>
+                <button id="themeToggle" class="header-btn" type="button" title="Toggle theme">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Pages Container -->
+        <div class="page-container">
+
+            <!-- PAGE 1: DASHBOARD -->
+            <section id="page-dashboard" class="page active">
+                <div class="page-header">
+                    <div>
+                        <span class="page-eyebrow">NETWORK INTELLIGENCE CENTER</span>
+                        <h2>IP Address Workbench</h2>
+                        <p>Professional IPv4, IPv6 and subnetting utilities for network engineers & IT security.</p>
+                    </div>
+                    <button id="dashboardReset" class="btn secondary" type="button">
+                        <i class="fa-solid fa-rotate-left"></i> Reset Workbench
+                    </button>
+                </div>
+
+                <div class="status-banner">
+                    <div class="status-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                    <div class="status-text">
+                        <strong>Client-side Calculation Engine</strong>
+                        <span>All operations execute locally in browser memory. Zero network transmission.</span>
+                    </div>
+                    <span class="status-pill"><span class="status-dot"></span> SECURE</span>
+                </div>
+
+                <!-- Stats Grid -->
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon ipv4"><i class="fa-solid fa-network-wired"></i></div>
+                        <div><span>IPv4 UTILITIES</span><strong>8 Tools</strong><small>Subnet, CIDR, VLSM, Supernet</small></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon ipv6"><i class="fa-solid fa-globe"></i></div>
+                        <div><span>IPv6 SUITE</span><strong>3 Tools</strong><small>Expanded, Compressed, Validated</small></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon conv"><i class="fa-solid fa-right-left"></i></div>
+                        <div><span>CONVERTERS</span><strong>5 Tools</strong><small>Binary, Hex, Integer, Decimal</small></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon ref"><i class="fa-solid fa-book"></i></div>
+                        <div><span>REFERENCES</span><strong>4 Tables</strong><small>Ports, Protocols, CIDR, Subnets</small></div>
+                    </div>
+                </div>
+
+                <!-- Quick Access Cards -->
+                <div class="section-title">
+                    <div><span class="kicker">QUICK ACCESS</span><h3>Frequently Used Tools</h3></div>
+                </div>
+                <div class="quick-tools-grid">
+                    <button class="quick-card" data-page="subnet-calculator" type="button">
+                        <div class="quick-icon"><i class="fa-solid fa-calculator"></i></div>
+                        <div class="quick-info"><strong>Subnet Calculator</strong><small>Calculate network, broadcast, mask and host ranges</small></div>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                    <button class="quick-card" data-page="cidr-calculator" type="button">
+                        <div class="quick-icon"><i class="fa-solid fa-layer-group"></i></div>
+                        <div class="quick-info"><strong>CIDR Calculator</strong><small>Prefix lengths, wildcard and address capacity</small></div>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                    <button class="quick-card" data-page="vlsm-calculator" type="button">
+                        <div class="quick-icon"><i class="fa-solid fa-diagram-project"></i></div>
+                        <div class="quick-info"><strong>VLSM Calculator</strong><small>Design variable-length subnet allocations</small></div>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                    <button class="quick-card" data-page="ip-classifier" type="button">
+                        <div class="quick-icon"><i class="fa-solid fa-tags"></i></div>
+                        <div class="quick-info"><strong>IP Classifier</strong><small>Class A/B/C/D/E, Public/Private scope detection</small></div>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                    <button class="quick-card" data-page="ip-validator" type="button">
+                        <div class="quick-icon"><i class="fa-solid fa-circle-check"></i></div>
+                        <div class="quick-info"><strong>IP Validator</strong><small>Validate syntax, binary bits and integers</small></div>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                    <button class="quick-card" data-page="ip-converter" type="button">
+                        <div class="quick-icon"><i class="fa-solid fa-right-left"></i></div>
+                        <div class="quick-info"><strong>IP Converter</strong><small>Convert IP to binary, hex and 32-bit integer</small></div>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- PAGE 2: SUBNET CALCULATOR -->
+            <section id="page-subnet-calculator" class="page">
+                <div class="page-header">
+                    <div>
+                        <span class="page-eyebrow">IPv4 / SUBNETTING</span>
+                        <h2>Subnet Calculator</h2>
+                        <p>Calculate complete network parameters from an IPv4 address and CIDR prefix.</p>
+                    </div>
+                    <button class="btn secondary" data-action="reset-subnet" type="button">
+                        <i class="fa-solid fa-rotate-left"></i> Reset
+                    </button>
+                </div>
+
+                <div class="tool-layout">
+                    <div class="tool-input-col">
+                        <div class="card">
+                            <div class="card-title"><span class="kicker">INPUT</span><h3>Network Parameters</h3></div>
+                            <div class="form-group">
+                                <label for="subnetIp">IPv4 Address</label>
+                                <input id="subnetIp" class="text-input mono" type="text" value="192.168.1.100" placeholder="192.168.1.1">
+                            </div>
+                            <div class="form-group">
+                                <label for="subnetPrefix">CIDR Prefix</label>
+                                <div class="range-wrapper">
+                                    <input id="subnetPrefix" type="range" min="0" max="32" value="24">
+                                    <output id="subnetPrefixVal" class="range-val">/24</output>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Quick Prefixes</label>
+                                <div id="commonPrefixes" class="prefix-pills">
+                                    <button type="button" data-prefix="8">/8</button>
+                                    <button type="button" data-prefix="16">/16</button>
+                                    <button type="button" data-prefix="24" class="active">/24</button>
+                                    <button type="button" data-prefix="28">/28</button>
+                                    <button type="button" data-prefix="30">/30</button>
+                                    <button type="button" data-prefix="32">/32</button>
+                                </div>
+                            </div>
+                            <button id="calcSubnetBtn" class="btn primary full-width" type="button">
+                                <i class="fa-solid fa-calculator"></i> Calculate Subnet
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="tool-result-col">
+                        <div class="card">
+                            <div class="card-title">
+                                <span class="kicker">RESULT</span><h3>Network Summary</h3>
+                                <div class="button-group-sm">
+                                    <button id="copySubnetSummaryBtn" class="btn secondary btn-sm" type="button" title="Copy Full Summary"><i class="fa-solid fa-copy"></i> Summary</button>
+                                    <button id="exportSubnetJsonBtn" class="btn secondary btn-sm" type="button" title="Export JSON"><i class="fa-solid fa-file-code"></i> JSON</button>
+                                    <button id="exportSubnetCsvBtn" class="btn secondary btn-sm" type="button" title="Export CSV"><i class="fa-solid fa-file-csv"></i> CSV</button>
+                                </div>
+                            </div>
+                            <div class="primary-result">
+                                <span>NETWORK CIDR</span>
+                                <strong id="resSubnetCidr" class="mono">192.168.1.0/24</strong>
+                            </div>
+                            <div class="metrics-grid">
+                                <div class="metric-card"><span>NETWORK ADDRESS</span><strong id="resSubnetNet" class="mono">192.168.1.0</strong></div>
+                                <div class="metric-card"><span>BROADCAST ADDRESS</span><strong id="resSubnetBcast" class="mono">192.168.1.255</strong></div>
+                                <div class="metric-card"><span>SUBNET MASK</span><strong id="resSubnetMask" class="mono">255.255.255.0</strong></div>
+                                <div class="metric-card"><span>WILDCARD MASK</span><strong id="resSubnetWildcard" class="mono">0.0.0.255</strong></div>
+                                <div class="metric-card"><span>FIRST HOST</span><strong id="resSubnetFirst" class="mono">192.168.1.1</strong></div>
+                                <div class="metric-card"><span>LAST HOST</span><strong id="resSubnetLast" class="mono">192.168.1.254</strong></div>
+                                <div class="metric-card"><span>TOTAL ADDRESSES</span><strong id="resSubnetTotal">256</strong></div>
+                                <div class="metric-card highlight"><span>USABLE HOSTS</span><strong id="resSubnetUsable">254</strong></div>
+                            </div>
+                        </div>
+
+                        <div class="card margin-top">
+                            <div class="card-title"><span class="kicker">DETAILS</span><h3>Classification & Increment</h3></div>
+                            <div class="details-list">
+                                <div class="detail-row"><span>IP Class</span><strong id="resSubnetClass">Class C</strong></div>
+                                <div class="detail-row"><span>Address Scope</span><strong id="resSubnetScope">Private Network</strong></div>
+                                <div class="detail-row"><span>Subnet Increment (Block Size)</span><strong id="resSubnetBlock" class="mono">256</strong></div>
+                            </div>
+                        </div>
+
+                        <div class="card margin-top">
+                            <div class="card-title"><span class="kicker">BINARY VISUALIZATION</span><h3>32-Bit Octet Breakdown</h3></div>
+                            <div id="subnetBinaryViz"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PAGE 3: CIDR CALCULATOR -->
+            <section id="page-cidr-calculator" class="page">
+                <div class="page-header">
+                    <div>
+                        <span class="page-eyebrow">IPv4 / CIDR</span>
+                        <h2>CIDR Calculator</h2>
+                        <p>Analyze CIDR notation, host bits, subnet bits and capacity.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="inline-form">
+                        <div class="form-group flex-1">
+                            <label for="cidrInput">CIDR Notation</label>
+                            <input id="cidrInput" class="text-input mono" type="text" value="10.0.0.1/8" placeholder="10.0.0.1/8">
+                        </div>
+                        <button id="calcCidrBtn" class="btn primary" type="button"><i class="fa-solid fa-layer-group"></i> Analyze CIDR</button>
+                    </div>
+                </div>
+                <div class="metrics-grid margin-top">
+                    <div class="metric-card"><span>PREFIX LENGTH</span><strong id="resCidrPrefix">/8</strong></div>
+                    <div class="metric-card"><span>SUBNET MASK</span><strong id="resCidrMask" class="mono">255.0.0.0</strong></div>
+                    <div class="metric-card"><span>WILDCARD MASK</span><strong id="resCidrWildcard" class="mono">0.255.255.255</strong></div>
+                    <div class="metric-card"><span>NETWORK</span><strong id="resCidrNet" class="mono">10.0.0.0</strong></div>
+                    <div class="metric-card"><span>BROADCAST</span><strong id="resCidrBcast" class="mono">10.255.255.255</strong></div>
+                    <div class="metric-card"><span>FIRST HOST</span><strong id="resCidrFirst" class="mono">10.0.0.1</strong></div>
+                    <div class="metric-card"><span>LAST HOST</span><strong id="resCidrLast" class="mono">10.255.255.254</strong></div>
+                    <div class="metric-card highlight"><span>USABLE HOSTS</span><strong id="resCidrUsable">16,777,214</strong></div>
+                    <div class="metric-card"><span>HOST BITS</span><strong id="resCidrHostBits">24 bits</strong></div>
+                    <div class="metric-card"><span>SUBNET BITS</span><strong id="resCidrSubnetBits">8 bits</strong></div>
+                </div>
+            </section>
+
+            <!-- PAGE 4: VLSM CALCULATOR -->
+            <section id="page-vlsm-calculator" class="page">
+                <div class="page-header">
+                    <div>
+                        <span class="page-eyebrow">IPv4 / VLSM</span>
+                        <h2>VLSM Calculator</h2>
+                        <p>Design variable-length subnet mask allocations for custom subnet host requirements.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-title">
+                        <span class="kicker">CONFIGURATION</span><h3>Base Network & Requirements</h3>
+                        <div class="button-group-sm">
+                            <button id="vlsmPresetBranch" class="btn secondary btn-sm" type="button" title="Load Branch Office Scenario"><i class="fa-solid fa-building"></i> Branch Preset</button>
+                            <button id="vlsmPresetVpc" class="btn secondary btn-sm" type="button" title="Load AWS VPC 3-Tier Scenario"><i class="fa-solid fa-cloud"></i> AWS VPC Preset</button>
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="vlsmBase">Base Network CIDR</label>
+                            <input id="vlsmBase" class="text-input mono" type="text" value="192.168.10.0/24">
+                        </div>
+                        <div class="form-group">
+                            <label for="vlsmReqName">Subnet Name</label>
+                            <input id="vlsmReqName" class="text-input" type="text" placeholder="e.g. Sales Department">
+                        </div>
+                        <div class="form-group">
+                            <label for="vlsmReqHosts">Required Hosts</label>
+                            <input id="vlsmReqHosts" class="text-input mono" type="number" min="1" placeholder="50">
+                        </div>
+                        <div class="form-group align-end">
+                            <button id="vlsmAddBtn" class="btn secondary" type="button"><i class="fa-solid fa-plus"></i> Add Subnet Requirement</button>
+                        </div>
+                    </div>
+
+                    <div id="vlsmReqList" class="req-list margin-top"></div>
+
+                    <div class="button-row margin-top">
+                        <button id="vlsmCalcBtn" class="btn primary" type="button"><i class="fa-solid fa-wand-magic-sparkles"></i> Generate VLSM Plan</button>
+                        <button id="vlsmExportBtn" class="btn secondary" type="button"><i class="fa-solid fa-download"></i> Export Table (TSV)</button>
+                    </div>
+                </div>
+
+                <div class="card margin-top">
+                    <div class="card-title"><span class="kicker">ALLOCATION TABLE</span><h3>Subnet Allocation Plan</h3></div>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Req. Hosts</th>
+                                    <th>Alloc. Hosts</th>
+                                    <th>CIDR</th>
+                                    <th>Subnet Mask</th>
+                                    <th>Network</th>
+                                    <th>First Host</th>
+                                    <th>Last Host</th>
+                                    <th>Broadcast</th>
+                                </tr>
+                            </thead>
+                            <tbody id="vlsmTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PAGE 5: SUPERNETTING -->
+            <section id="page-supernetting" class="page">
+                <div class="page-header">
+                    <div>
+                        <span class="page-eyebrow">IPv4 / AGGREGATION</span>
+                        <h2>Supernetting Calculator</h2>
+                        <p>Summarize multiple contiguous networks into a single aggregated supernet.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-title">
+                        <span class="kicker">NETWORKS</span><h3>Input CIDR Networks</h3>
+                        <button id="addSupernetRowBtn" class="btn secondary btn-sm" type="button"><i class="fa-solid fa-plus"></i> Add Network</button>
+                    </div>
+                    <div id="supernetInputsList" class="dynamic-inputs">
+                        <div class="input-row">
+                            <input class="text-input mono supernet-input" type="text" value="192.168.0.0/24">
+                            <button class="btn-icon danger remove-supernet-row" type="button"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                        <div class="input-row">
+                            <input class="text-input mono supernet-input" type="text" value="192.168.1.0/24">
+                            <button class="btn-icon danger remove-supernet-row" type="button"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                        <div class="input-row">
+                            <input class="text-input mono supernet-input" type="text" value="192.168.2.0/24">
+                            <button class="btn-icon danger remove-supernet-row" type="button"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                        <div class="input-row">
+                            <input class="text-input mono supernet-input" type="text" value="192.168.3.0/24">
+                            <button class="btn-icon danger remove-supernet-row" type="button"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    </div>
+                    <button id="calcSupernetBtn" class="btn primary margin-top" type="button"><i class="fa-solid fa-object-group"></i> Calculate Supernet</button>
+                </div>
+
+                <div class="card margin-top">
+                    <div class="card-title"><span class="kicker">RESULT</span><h3>Aggregated Supernet</h3></div>
+                    <div class="primary-result">
+                        <span>SUPERNET CIDR</span>
+                        <strong id="resSupernetCidr" class="mono">192.168.0.0/22</strong>
+                    </div>
+                    <div class="metrics-grid">
+                        <div class="metric-card"><span>SUPERNET MASK</span><strong id="resSupernetMask" class="mono">255.255.252.0</strong></div>
+                        <div class="metric-card"><span>WILDCARD MASK</span><strong id="resSupernetWildcard" class="mono">0.0.3.255</strong></div>
+                        <div class="metric-card"><span>AGGREGATED SUBNETS</span><strong id="resSupernetCount">4</strong></div>
+                        <div class="metric-card highlight"><span>TOTAL CAPACITY</span><strong id="resSupernetTotal">1,024 addresses</strong></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PAGE 6: IP RANGE -->
+            <section id="page-ip-range" class="page">
+                <div class="page-header">
+                    <div>
+                        <span class="page-eyebrow">IPv4 / RANGE</span>
+                        <h2>IP Range Calculator</h2>
+                        <p>Calculate total host count and capacity between two IPv4 endpoints.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="rangeStartIp">Start IPv4 Address</label>
+                            <input id="rangeStartIp" class="text-input mono" type="text" value="192.168.1.10">
+                        </div>
+                        <div class="form-group">
+                            <label for="rangeEndIp">End IPv4 Address</label>
+                            <input id="rangeEndIp" class="text-input mono" type="text" value="192.168.1.50">
+                        </div>
+                    </div>
+                    <button id="calcRangeBtn" class="btn primary" type="button"><i class="fa-solid fa-arrows-left-right"></i> Calculate Range</button>
+                </div>
+                <div class="metrics-grid margin-top">
+                    <div class="metric-card highlight"><span>TOTAL ADDRESSES IN RANGE</span><strong id="resRangeCount">41</strong></div>
+                    <div class="metric-card"><span>START IP (INTEGER)</span><strong id="resRangeStartInt" class="mono">3,232,235,786</strong></div>
+                    <div class="metric-card"><span>END IP (INTEGER)</span><strong id="resRangeEndInt" class="mono">3,232,235,826</strong></div>
+                    <div class="metric-card"><span>RANGE VALIDITY</span><strong id="resRangeValid">Valid Range</strong></div>
+                </div>
+                <div class="card margin-top" id="resRangeCidrList"></div>
+            </section>
+
+            <!-- PAGE 7: WILDCARD -->
+            <section id="page-wildcard" class="page">
+                <div class="page-header">
+                    <div>
+                        <span class="page-eyebrow">IPv4 / WILDCARD</span>
+                        <h2>Wildcard Mask Calculator</h2>
+                        <p>Convert subnet masks or CIDR prefixes to ACL inverse wildcard masks.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="inline-form">
+                        <div class="form-group flex-1">
+                            <label for="wildcardInput">Subnet Mask or CIDR Prefix</label>
+                            <input id="wildcardInput" class="text-input mono" type="text" value="255.255.255.0" placeholder="255.255.255.0 or /24">
+                        </div>
+                        <button id="calcWildcardBtn" class="btn primary" type="button"><i class="fa-solid fa-filter"></i> Calculate Wildcard</button>
+                    </div>
+                </div>
+                <div class="metrics-grid margin-top">
+                    <div class="metric-card highlight"><span>WILDCARD MASK</span><strong id="resWildcardMask" class="mono">0.0.0.255</strong></div>
+                    <div class="metric-card"><span>SUBNET MASK</span><strong id="resWildcardSubnet" class="mono">255.255.255.0</strong></div>
+                    <div class="metric-card"><span>CIDR PREFIX</span><strong id="resWildcardPrefix">/24</strong></div>
+                    <div class="metric-card"><span>BINARY WILDCARD</span><strong id="resWildcardBin" class="mono">00000000.00000000.00000000.11111111</strong></div>
+                </div>
+                <div class="card margin-top">
+                    <div class="card-title">
+                        <span class="kicker">CISCO IOS ACL SNIPPET</span><h3>Generated Access Control List Syntax</h3>
+                        <button class="btn-icon" data-copy-target="resWildcardAcl" type="button" title="Copy ACL Syntax"><i class="fa-regular fa-copy"></i></button>
+                    </div>
+                    <pre id="resWildcardAcl" class="code-block mono" style="white-space:pre-wrap;background:var(--bg-primary);padding:12px;border-radius:6px;border:1px solid var(--border);color:var(--accent);font-size:12px;margin:0;"></pre>
+                </div>
+            </section>
+
+            <!-- PAGE 8: IP CLASSIFIER -->
+            <section id="page-ip-classifier" class="page">
+                <div class="page-header">
+                    <div>
+                        <span class="page-eyebrow">IPv4 / CLASSIFICATION</span>
+                        <h2>IP Classifier</h2>
+                        <p>Identify address class, RFC scope, public/private designation, and default mask.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="inline-form">
+                        <div class="form-group flex-1">
+                            <label for="classifyInput">IPv4 Address</label>
+                            <input id="classifyInput" class="text-input mono" type="text" value="192.168.1.100">
+                        </div>
+                        <button id="calcClassifyBtn" class="btn primary" type="button"><i class="fa-solid fa-tags"></i> Classify IP</button>
+                    </div>
+                </div>
+                <div class="metrics-grid margin-top">
+                    <div class="metric-card"><span>ADDRESS CLASS</span><strong id="resClassClass">Class C</strong></div>
+                    <div class="metric-card highlight"><span>DESIGNATION TYPE</span><strong id="resClassType">Private (RFC 1918)</strong></div>
+                    <div class="metric-card"><span>SCOPE</span><strong id="resClassScope">Local Network</strong></div>
+                    <div class="metric-card"><span>DEFAULT SUBNET MASK</span><strong id="resClassMask" class="mono">255.255.255.0</strong></div>
+                </div>
+            </section>
+
+            <!-- PAGE 9: IP VALIDATOR -->
+            <section id="page-ip-validator" class="page">
+                <div class="page-header">
+                    <div>
+                        <span class="page-eyebrow">VALIDATION</span>
+                        <h2>IP Validator</h2>
+                        <p>Validate IPv4 syntax, octet bounds, and inspect core format properties.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="inline-form">
+                        <div class="form-group flex-1">
+                            <label for="validateIpInput">IP Address</label>
+                            <input id="validateIpInput" class="text-input mono" type="text" value="192.168.1.1">
+                        </div>
+                        <button id="calcValidateBtn" class="btn primary" type="button"><i class="fa-solid fa-circle-check"></i> Validate IP</button>
+                    </div>
+                </div>
+                <div id="validateResultBox" class="margin-top"></div>
+            </section>
+
+            <!-- PAGE 10: IP CONVERTER -->
+            <section id="page-ip-converter" class="page">
+                <div class="page-header">
+                    <div>
+                        <span class="page-eyebrow">CONVERSION</span>
+                        <h2>IP Address Converter</h2>
+                        <p>Convert an IPv4 address between dotted decimal, binary, hex, and 32-bit integer formats.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="inline-form">
+                        <div class="form-group flex-1">
+                            <label for="convertIpInput">IPv4 Address</label>
+                            <input id="convertIpInput" class="text-input mono" type="text" value="192.168.1.1">
+                        </div>
+                        <button id="calcConvertBtn" class="btn primary" type="button"><i class="fa-solid fa-right-left"></i> Convert All Formats</button>
+                    </div>
+                </div>
+                <div class="metrics-grid margin-top">
+                    <div class="metric-card">
+                        <div class="card-title"><span>DOTTED DECIMAL</span><button class="btn-icon" data-copy-target="resConvDec" type="button"><i class="fa-regular fa-copy"></i></button></div>
+                        <strong id="resConvDec" class="mono">192.168.1.1</strong>
+                    </div>
+                    <div class="metric-card">
+                        <div class="card-title"><span>BINARY</span><button class="btn-icon" data-copy-target="resConvBin" type="button"><i class="fa-regular fa-copy"></i></button></div>
+                        <strong id="resConvBin" class="mono">11000000.10101000.00000001.00000001</strong>
+                    </div>
+                    <div class="metric-card">
+                        <div class="card-title"><span>HEXADECIMAL</span><button class="btn-icon" data-copy-target="resConvHex" type="button"><i class="fa-regular fa-copy"></i></button></div>
+                        <strong id="resConvHex" class="mono">C0.A8.01.01</strong>
+                    </div>
+                    <div class="metric-card">
+                        <div class="card-title"><span>32-BIT INTEGER</span><button class="btn-icon" data-copy-target="resConvInt" type="button"><i class="fa-regular fa-copy"></i></button></div>
+                        <strong id="resConvInt" class="mono">3232235777</strong>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PAGE 11: BINARY CONVERTER -->
+            <section id="page-binary-converter" class="page">
+                <div class="page-header">
+                    <div>
+                        <span class="page-eyebrow">CONVERSION / BINARY</span>
+                        <h2>Binary Converter</h2>
+                        <p>Convert 8-bit octet binary or 32-bit dotted binary notation to decimal.</p>
+                    </div>
+                </div>
+                <div class="form-grid">
+                    <div class="card">
+                        <div class="card-title"><span class="kicker">32-BIT BINARY</span><h3>Full Binary IP to Decimal</h3></div>
+                        <div class="form-group">
+                            <label for="binIpInput">Dotted Binary IP</label>
+                            <input id="binIpInput" class="text-input mono" type="text" value="11000000.10101000.00000001.00000001">
+                        </div>
+                        <button id="calcBinIpBtn" class="btn primary" type="button">Convert to IPv4</button>
+                        <div class="output-box margin-top"><span class="kicker">RESULT</span><strong id="resBinIp" class="mono">192.168.1.1</strong></div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title"><span class="kicker">8-BIT OCTET</span><h3>Single Octet Binary to Decimal</h3></div>
+                        <div class="form-group">
+                            <label for="binOctetInput">8-Bit Binary</label>
+                            <input id="binOctetInput" class="text-input mono" type="text" value="11000000">
+                        </div>
+                        <button id="calcBinOctetBtn" class="btn primary" type="button">Convert to Decimal</button>
+                        <div class="output-box margin-top"><span class="kicker">RESULT</span><strong id="resBinOctet" class="mono">192</strong></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PAGE 12: DECIMAL CONVERTER -->
+            <section id="page-decimal-converter" class="page">
+                <div class="page-header">
+                    <div>
+                        <span class="page-eyebrow">CONVERSION / DECIMAL</span>
+                        <h2>Decimal Converter</h2>
+                        <p>Convert decimal IPv4 octets or decimal numbers into binary and hex.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="inline-form">
+                        <div class="form-group flex-1">
+                            <label for="decimalValInput">Decimal Value (0–255 or Decimal IP)</label>
+                            <input id="decimalValInput" class="text-input mono" type="text" value="192">
+                        </div>
+                        <button id="calcDecBtn" class="btn primary" type="button">Convert Decimal</button>
+                    </div>
+                </div>
+                <div class="metrics-grid margin-top">
+                    <div class="metric-card"><span>BINARY</span><strong id="resDecBin" class="mono">11000000</strong></div>
+                    <div class="metric-card"><span>HEXADECIMAL</span><strong id="resDecHex" class="mono">C0</strong></div>
+                    <div class="metric-card"><span>DECIMAL</span><strong id="resDecVal" class="mono">192</strong></div>
+                </div>
+            </section>
+
+            <!-- PAGE 13: HEX CONVERTER -->
+            <section id="page-hex-converter" class="page">
+                <div class="page-header">
+                    <div>
+                        <span class="page-eyebrow">CONVERSION / HEX</span>
+                        <h2>Hexadecimal Converter</h2>
+                        <p>Convert hexadecimal strings (e.g. C0A80101) to dotted decimal IPv4.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="inline-form">
+                        <div class="form-group flex-1">
+                            <label for="hexValInput">Hex String (e.g. C0A80101 or C0.A8.01.01)</label>
+                            <input id="hexValInput" class="text-input mono" type="text" value="C0A80101">
+                        </div>
+                        <button id="calcHexBtn" class="btn primary" type="button">Convert Hex</button>
+                    </div>
+                </div>
+                <div class="metrics-grid margin-top">
+                    <div class="metric-card highlight"><span>DOTTED DECIMAL IP</span><strong id="resHexIp" class="mono">192.168.1.1</strong></div>
+                    <div class="metric-card"><span>BINARY</span><strong id="resHexBin" class="mono">11000000.10101000.00000001.00000001</strong></div>
+                    <div class="metric-card"><span>32-BIT INTEGER</span><strong id="resHexInt" class="mono">3232235777</strong></div>
+                </div>
+            </section>
+
+            <!-- PAGE 14: INTEGER CONVERTER -->
+            <section id="page-integer-converter" class="page">
+                <div class="page-header">
+                    <div>
+                        <span class="page-eyebrow">CONVERSION / INTEGER</span>
+                        <h2>32-Bit Integer Converter</h2>
+                        <p>Convert 32-bit unsigned integers (0 to 4294967295) to IPv4 addresses.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="inline-form">
+                        <div class="form-group flex-1">
+                            <label for="intValInput">32-Bit Integer (e.g. 3232235777)</label>
+                            <input id="intValInput" class="text-input mono" type="number" value="3232235777" min="0" max="4294967295">
+                        </div>
+                        <button id="calcIntBtn" class="btn primary" type="button">Convert Integer</button>
+                    </div>
+                </div>
+                <div class="metrics-grid margin-top">
+                    <div class="metric-card highlight"><span>DOTTED DECIMAL IP</span><strong id="resIntIp" class="mono">192.168.1.1</strong></div>
+                    <div class="metric-card"><span>BINARY</span><strong id="resIntBin" class="mono">11000000.10101000.00000001.00000001</strong></div>
+                    <div class="metric-card"><span>HEXADECIMAL</span><strong id="resIntHex" class="mono">C0A80101</strong></div>
+                </div>
+            </section>
+
+            <!-- PAGE 15: IPv6 CALCULATOR -->
+            <section id="page-ipv6-calculator" class="page">
+                <div class="page-header">
+                    <div>
+                        <span class="page-eyebrow">IPv6</span>
+                        <h2>IPv6 Calculator</h2>
+                        <p>Analyze IPv6 address structures, prefix lengths, expansion and compression.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="inline-form">
+                        <div class="form-group flex-1">
+                            <label for="ipv6CalcInput">IPv6 Address / CIDR</label>
+                            <input id="ipv6CalcInput" class="text-input mono" type="text" value="2001:db8::1/64">
+                        </div>
+                        <button id="calcIpv6Btn" class="btn primary" type="button"><i class="fa-solid fa-globe"></i> Analyze IPv6</button>
+                    </div>
+                </div>
+                <div class="metrics-grid margin-top">
+                    <div class="metric-card"><span>COMPRESSED ADDRESS</span><strong id="resIpv6Comp" class="mono">2001:db8::1</strong></div>
+                    <div class="metric-card"><span>EXPANDED ADDRESS</span><strong id="resIpv6Exp" class="mono">2001:0db8:0000:0000:0000:0000:0000:0001</strong></div>
+                    <div class="metric-card"><span>PREFIX LENGTH</span><strong id="resIpv6Prefix">/64</strong></div>
+                    <div class="metric-card"><span>ADDRESS SCOPE / TYPE</span><strong id="resIpv6Scope">Documentation (RFC 3849)</strong></div>
+                </div>
+            </section>
+
+            <!-- PAGE 16: IPv6 COMPRESSION -->
+            <section id="page-ipv6-compression" class="page">
+                <div class="page-header">
+                    <div>
+                        <span class="page-eyebrow">IPv6 / NOTATION</span>
+                        <h2>IPv6 Compress / Expand</h2>
+                        <p>Convert IPv6 addresses between full 128-bit notation and RFC 5952 zero-compressed form.</p>
+                    </div>
+                </div>
+                <div class="form-grid">
+                    <div class="card">
+                        <div class="card-title"><span class="kicker">EXPAND</span><h3>Compress → Full Notation</h3></div>
+                        <div class="form-group">
+                            <label for="ipv6CompInput">Compressed IPv6</label>
+                            <input id="ipv6CompInput" class="text-input mono" type="text" value="2001:db8::ff00:42:8329">
+                        </div>
+                        <button id="expandIpv6Btn" class="btn primary" type="button">Expand IPv6</button>
+                        <div class="output-box margin-top"><span class="kicker">EXPANDED RESULT</span><strong id="resIpv6Expanded" class="mono">2001:0db8:0000:0000:0000:ff00:0042:8329</strong></div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title"><span class="kicker">COMPRESS</span><h3>Full → Compressed Notation</h3></div>
+                        <div class="form-group">
+                            <label for="ipv6ExpInput">Full Expanded IPv6</label>
+                            <input id="ipv6ExpInput" class="text-input mono" type="text" value="2001:0db8:0000:0000:0000:ff00:0042:8329">
+                        </div>
+                        <button id="compressIpv6Btn" class="btn primary" type="button">Compress IPv6</button>
+                        <div class="output-box margin-top"><span class="kicker">COMPRESSED RESULT</span><strong id="resIpv6Compressed" class="mono">2001:db8::ff00:42:8329</strong></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PAGE 17: IPv6 VALIDATOR -->
+            <section id="page-ipv6-validator" class="page">
+                <div class="page-header">
+                    <div>
+                        <span class="page-eyebrow">IPv6 / VALIDATION</span>
+                        <h2>IPv6 Validator</h2>
+                        <p>Validate IPv6 syntax, hextet groups, and double-colon compression limits.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="inline-form">
+                        <div class="form-group flex-1">
+                            <label for="ipv6ValInput">IPv6 Address</label>
+                            <input id="ipv6ValInput" class="text-input mono" type="text" value="2001:db8::1">
+                        </div>
+                        <button id="calcIpv6ValBtn" class="btn primary" type="button"><i class="fa-solid fa-shield-halved"></i> Validate IPv6</button>
+                    </div>
+                </div>
+                <div id="ipv6ValResultBox" class="margin-top"></div>
+            </section>
+
+            <!-- PAGE 18: MAC TOOLS -->
+            <section id="page-mac-tools" class="page">
+                <div class="page-header">
+                    <div>
+                        <span class="page-eyebrow">NETWORK / MAC</span>
+                        <h2>MAC Address Tools</h2>
+                        <p>Validate, normalize, and convert MAC addresses between colon, hyphen, and Cisco dot formats.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="inline-form">
+                        <div class="form-group flex-1">
+                            <label for="macInput">MAC Address</label>
+                            <input id="macInput" class="text-input mono" type="text" value="001122334455">
+                        </div>
+                        <button id="calcMacBtn" class="btn primary" type="button"><i class="fa-solid fa-ethernet"></i> Normalize MAC</button>
+                    </div>
+                </div>
+                <div class="metrics-grid margin-top">
+                    <div class="metric-card"><span>COLON FORMAT</span><strong id="resMacColon" class="mono">00:11:22:33:44:55</strong></div>
+                    <div class="metric-card"><span>HYPHEN FORMAT</span><strong id="resMacHyphen" class="mono">00-11-22-33-44-55</strong></div>
+                    <div class="metric-card"><span>CISCO DOT FORMAT</span><strong id="resMacDot" class="mono">0011.2233.4455</strong></div>
+                    <div class="metric-card"><span>OUI PREFIX</span><strong id="resMacOui" class="mono">00:11:22</strong></div>
+                    <div class="metric-card"><span>CAST TYPE</span><strong id="resMacCast">Unicast</strong></div>
+                    <div class="metric-card"><span>ADMINISTRATION</span><strong id="resMacAdmin">Globally Unique (IEEE)</strong></div>
+                    <div class="metric-card highlight"><span>SLAAC EUI-64 LINK-LOCAL IPv6</span><strong id="resMacEui64" class="mono">fe80::211:22ff:fe33:4455</strong></div>
+                </div>
+            </section>
+
+            <!-- PAGE 19: PORT REFERENCE -->
+            <section id="page-port-reference" class="page">
+                <div class="page-header">
+                    <div>
+                        <span class="page-eyebrow">REFERENCE / PORTS</span>
+                        <h2>Port Reference Database</h2>
+                        <p>Searchable registry of standard TCP and UDP network service ports.</p>
+                    </div>
+                    <button id="exportPortCsvBtn" class="btn secondary" type="button"><i class="fa-solid fa-file-csv"></i> Export CSV</button>
+                </div>
+                <div class="card">
+                    <div class="table-toolbar">
+                        <div class="search-box">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input id="portTableSearch" type="search" placeholder="Search port, protocol or service name...">
+                        </div>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr><th>Port</th><th>Protocol</th><th>Service</th><th>Description</th></tr>
+                            </thead>
+                            <tbody id="portTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PAGE 20: PROTOCOL REFERENCE -->
+            <section id="page-protocol-reference" class="page">
+                <div class="page-header">
+                    <div>
+                        <span class="page-eyebrow">REFERENCE / PROTOCOLS</span>
+                        <h2>Protocol Reference</h2>
+                        <p>Core networking and OSI transport layer protocol breakdown.</p>
+                    </div>
+                    <button id="exportProtoCsvBtn" class="btn secondary" type="button"><i class="fa-solid fa-file-csv"></i> Export CSV</button>
+                </div>
+                <div class="card">
+                    <div class="table-toolbar">
+                        <div class="search-box">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input id="protocolTableSearch" type="search" placeholder="Search protocols...">
+                        </div>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr><th>Protocol</th><th>OSI Layer</th><th>Purpose</th><th>Common Port</th><th>Transport</th></tr>
+                            </thead>
+                            <tbody id="protocolTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PAGE 21: CIDR REFERENCE -->
+            <section id="page-cidr-reference" class="page">
+                <div class="page-header">
+                    <div>
+                        <span class="page-eyebrow">REFERENCE / CIDR</span>
+                        <h2>CIDR Reference Table</h2>
+                        <p>Complete IPv4 prefix reference from /0 through /32 with mask, capacity, and block size.</p>
+                    </div>
+                    <button id="exportCidrCsvBtn" class="btn secondary" type="button"><i class="fa-solid fa-file-csv"></i> Export CSV</button>
+                </div>
+                <div class="card">
+                    <div class="table-toolbar">
+                        <div class="search-box">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input id="cidrTableSearch" type="search" placeholder="Search prefix or mask...">
+                        </div>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr><th>CIDR</th><th>Subnet Mask</th><th>Wildcard Mask</th><th>Addresses</th><th>Usable Hosts</th><th>Block Size</th></tr>
+                            </thead>
+                            <tbody id="cidrTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PAGE 22: SUBNET REFERENCE -->
+            <section id="page-subnet-reference" class="page">
+                <div class="page-header">
+                    <div>
+                        <span class="page-eyebrow">REFERENCE / SUBNETTING</span>
+                        <h2>Subnetting Reference Guides</h2>
+                        <p>Standard architectural subnetting reference patterns for enterprise networks.</p>
+                    </div>
+                </div>
+                <div id="subnetGuidesGrid" class="cards-grid"></div>
+            </section>
+
+        </div>
+    </main>
+
+</div>
+
+<!-- Global Search Modal -->
+<div id="searchModal" class="modal" aria-hidden="true">
+    <div class="modal-backdrop"></div>
+    <div class="modal-dialog">
+        <div class="modal-header">
+            <div><span class="kicker">COMMAND CENTER</span><h3>Global Tool Search</h3></div>
+            <button class="btn-icon" data-modal-close type="button"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input id="modalSearchInput" type="search" placeholder="Search all NetForge tools..." autocomplete="off">
+            <kbd>ESC</kbd>
+        </div>
+        <div id="searchResultsList" class="search-results"></div>
+    </div>
+</div>
+
+<!-- History Modal -->
+<div id="historyModal" class="modal" aria-hidden="true">
+    <div class="modal-backdrop"></div>
+    <div class="modal-dialog large">
+        <div class="modal-header">
+            <div><span class="kicker">WORKSPACE</span><h3>Calculation History</h3></div>
+            <div class="header-actions">
+                <button id="clearHistoryBtn" class="btn danger btn-sm" type="button"><i class="fa-solid fa-trash"></i> Clear History</button>
+                <button class="btn-icon" data-modal-close type="button"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+        </div>
+        <div id="modalHistoryList" class="history-list"></div>
+    </div>
+</div>
+
+<!-- Toast Container -->
+<div id="toastContainer" class="toast-container" aria-live="polite"></div>
+
+<!-- Scripts -->
+<script src="script.js"></script>
+
+</body>
+</html>

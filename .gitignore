@@ -1,0 +1,6 @@
+# Ignore temporary files
+.DS_Store
+Thumbs.db
+
+# Track demo video in demo_video/ folder
+!demo_video/demo_walkthrough.mp4
