@@ -15,8 +15,10 @@ Designed as an all-in-one client-side suite, NetForge delivers instant subnettin
 ## 📽️ Application Walkthrough Demo
 
 <div align="center">
-  <video src="demo_video/demo_walkthrough.mp4" controls="controls" muted="muted" style="max-width: 100%; border-radius: 8px;">
-    NetForge IP Toolkit Interactive Demo
+
+https://github.com/user-attachments/assets/80547052-a25b-4030-93c1-eb81f3357e56
+
+  NetForge IP Toolkit Interactive Demo
   </video>
 </div>
 
@@ -58,6 +60,7 @@ NetForge-IP-Toolkit/
 ├── style.css        # Modern technical dark theme CSS variables & responsive layout
 ├── script.js        # Strict-mode JS bitwise math engine & event delegation
 ├── favicon.svg      # SVG vector favicon icon
+|── demo_video/      # A demo video to showcase the use of the tool
 ├── LICENSE          # MIT Open Source License
 └── README.md        # Documentation
 ```
@@ -82,7 +85,7 @@ NetForge-IP-Toolkit/
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/YOUR-USERNAME/NetForge-IP-Toolkit.git
+   git clone https://github.com/Bhuvaneshkumar1/NETFORGE.git
    cd NetForge-IP-Toolkit
    ```
 
@@ -96,15 +99,7 @@ NetForge-IP-Toolkit/
 
 ---
 
-## 🌐 Deploy to GitHub Pages (Free Live Hosting)
 
-To make your toolkit accessible to anyone on the web:
-1. Push your code to GitHub.
-2. Go to **Repository Settings** -> **Pages**.
-3. Under **Build and deployment**, select `main` branch and root `/` folder.
-4. Click **Save**. Your site will be live at `https://YOUR-USERNAME.github.io/NetForge-IP-Toolkit/` in 60 seconds!
-
----
 
 ## 📜 License
 
